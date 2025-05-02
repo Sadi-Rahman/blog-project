@@ -1,0 +1,19 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/icons-material": "^7.0.2",
+    "@mui/material": "latest",
+    "axios": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  }
+}
