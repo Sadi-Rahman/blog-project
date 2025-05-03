@@ -12,3 +12,10 @@
 - **Frontend**: Next.js 13, React 18, Material UI v5, Axios for HTTP requests.
 - **Backend**: Express.js, mysql2, bcrypt for password hashing, jsonwebtoken for JWTs.
 - **Database**: MySQL (via XAMPP), with `users` and `posts` tables and foreign‑key constraints.
+
+## Screenshots
+![Screenshot 2025-05-03 170304](https://github.com/user-attachments/assets/dd294463-e5b9-48b1-a0b9-f225e15eb7fb)
+![Screenshot 2025-05-03 170231](https://github.com/user-attachments/assets/945a898d-e0fe-4200-b5ca-6ad2f7f69eb4)
+![Screenshot 2025-05-03 170145](https://github.com/user-attachments/assets/769ab59a-0d67-4834-b76f-49771dbe4041)
+![Screenshot 2025-05-03 170357](https://github.com/user-attachments/assets/be210810-a6cc-4899-ba42-4c03f4528779)
+![Screenshot 2025-05-03 170336](https://github.com/user-attachments/assets/09892890-c858-48fc-9966-fc00e22d2ee8)
