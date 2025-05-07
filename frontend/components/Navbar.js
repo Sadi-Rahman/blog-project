@@ -8,10 +8,13 @@ export default function Navbar({ onOpen }) {
   const { pathname } = useRouter();
   const [username, setUsername] = useState(null);
   const [token, setToken] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+    const userIsAdmin = localStorage.getItem("is_admin") === "true";
     setUsername(localStorage.getItem("username"));
     setToken(localStorage.getItem("token"));
+    setIsAdmin(userIsAdmin);
   }, []);
 
   if (pathname === "/login" || pathname === "/signup") {
@@ -99,6 +102,16 @@ export default function Navbar({ onOpen }) {
                 sx={{ textTransform: "none" }}
               >
                 Create Post
+              </Button>
+            )}
+            {isAdmin && (
+              <Button
+                component={Link}
+                href="/admin"
+                color="inherit"
+                sx={{ textTransform: "none" }}
+              >
+                Admin Dashboard
               </Button>
             )}
           </>

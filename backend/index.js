@@ -40,6 +40,80 @@ app.get("/api/posts", async (req, res) => {
   }
 });
 
+// Add routes for user profiles and admin functionality
+
+/** --- Public Route: View Another User's Posts --- **/
+app.get("/api/users/:id/posts", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const [rows] = await db
+      .promise()
+      .query(
+        "SELECT id, content, created_at FROM posts WHERE user_id = ? ORDER BY created_at DESC",
+        [userId]
+      );
+    res.json(rows);
+  } catch (err) {
+    console.error("Error fetching user posts:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+/** --- Admin Routes --- **/
+app.use("/api/admin", authenticate);
+
+// Admin: View All Posts
+app.get("/api/admin/posts", async (req, res) => {
+  if (!req.user.is_admin) {
+    return res.status(403).json({ error: "Access denied" });
+  }
+  try {
+    const [rows] = await db.promise().query(
+      `SELECT p.id, p.content, p.created_at, p.user_id, u.username
+         FROM posts p
+         JOIN users u ON p.user_id = u.id
+         ORDER BY p.created_at DESC`
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error("Error fetching posts:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Admin: Delete Any Post
+app.delete("/api/admin/posts/:id", async (req, res) => {
+  if (!req.user.is_admin) {
+    return res.status(403).json({ error: "Access denied" });
+  }
+  try {
+    const postId = req.params.id;
+    await db.promise().execute("DELETE FROM posts WHERE id = ?", [postId]);
+    res.json({ message: "Post deleted" });
+  } catch (err) {
+    console.error("Error deleting post:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Admin: Edit Any Post
+app.put("/api/admin/posts/:id", async (req, res) => {
+  if (!req.user.is_admin) {
+    return res.status(403).json({ error: "Access denied" });
+  }
+  try {
+    const postId = req.params.id;
+    const { content } = req.body;
+    await db
+      .promise()
+      .execute("UPDATE posts SET content = ? WHERE id = ?", [content, postId]);
+    res.json({ message: "Post updated" });
+  } catch (err) {
+    console.error("Error updating post:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 /** --- Protected Posts Routes --- **/
 app.use("/api/posts", authenticate);
 

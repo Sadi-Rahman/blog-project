@@ -25,6 +25,7 @@ export default function Login() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("username", res.data.username);
       localStorage.setItem("userId", res.data.id);
+      localStorage.setItem("is_admin", res.data.is_admin);
       router.push("/");
     } catch (err) {
       setError(err.response?.data.error || "Login failed");

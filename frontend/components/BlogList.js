@@ -31,7 +31,7 @@ export default function BlogList({
             //   </Avatar>
             // }
             title={
-              <Link href={`/profile/${post.user_id}`} passHref>
+              <Link href={`/user/${post.user_id}`} passHref>
                 <Typography
                   component="a"
                   variant="subtitle1"
